@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>110borwein of Stella and Bethsaleele</title>
+	<meta charset="utf-8">
+	<style>
+		body {
+			background-color: black;
+			l
+		}
+	</style>
+	<script type="text/javascript">
+		function ver_val_abs(x)
+{
+    if (Math.abs(x) < 1e-8)
+        return 1.0;
+    if (x != 0)
+        return asin(x) / x;
+    else
+        return 0;
+}
+
+function function_evaluation(x, n)
+{
+    let b = 0;
+    let f = 1.0;
+
+    for (let k = 0; k < n + 1; k++) {
+        b = x / (2 * k + 1);
+        if (b == 0)
+            break;
+        if (b < 0)
+            b = b * (-1);
+        f *= ver_val_abs(b);
+    }
+    return f;
+}
+
+function midpoint(a, b, n)
+{
+	alert("Bonjour")
+    let tmp = 0.0;
+    let f = 0.0;
+    let h = Number(b - a) / 10000;
+
+    for (let k = 0; k < 10000; k++) {
+        tmp = a + (h * (k + 0.5));
+        f += function_evaluation(tmp, n);
+    }
+    f = f * h;
+    process.stdout.write("Midpoint:\n");
+    process.stdout.write("I%d = %.10f\n");
+    process.stdout.write(n);
+    process.stdout.write(f);
+    process.stdout.write("diff = %.10f\n\n");
+    process.stdout.write((M_PI / 2) - f);
+    return f;
+}
+	</script>
+</head>
+<p style="text-align: center;">
+<img src="2362935.jpg" width="1000" height="500">
+</p>
+<body>
+	<h2 style="text-align: center;">
+		Welcome to our site, we solve your Borwein calculations
+	</h2>
+	<p style="text-align: center;">
+		<style>
+			body {
+				color: white;
+			}
+		</style>Enter a number : <?= $n; ?>
+	</p>
+	<form style="text-align: center;">
+		<input type="Number" name="n" id="n" placeholder="constant">
+		<input type="submit" name="formsend" id="forms">
+	</form>
+	<script type="text/javascript">
+		midpoint(0, 5000, $n)
+	</script>
+</body>
+</html>
