@@ -6,62 +6,162 @@
 	<style>
 		body {
 			background-color: black;
-			l
 		}
+.bubble {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 25px rgba (255, 255, 255, 0.25);
+  animation: animate_4010 8s ease-in-out infinite;
+}
+
+.bubble:nth-child(2) {
+  position: relative;
+  zoom: 0.45;
+  left: -10px;
+  top: -100px;
+  animation-delay: -4s;
+}
+
+.bubble:nth-child(3) {
+  position: relative;
+  zoom: 0.45;
+  right: -80px;
+  top: -300px;
+  animation-delay: -6s;
+}
+
+.bubble:nth-child(4) {
+  position: relative;
+  zoom: 0.35;
+  left: -120px;
+  bottom: -200px;
+  animation-delay: -3s;
+}
+
+.bubble:nth-child(5) {
+  position: relative;
+  zoom: 0.5;
+  left: 0px;
+  top: 200px;
+  animation-delay: -5s;
+}
+
+@keyframes animate_4010 {
+  0%,100% {
+    transform: translateY(-20px);
+  }
+
+  50% {
+    transform: translateY(20px);
+  }
+}
+
+.bubble::before {
+  content: '';
+  position: absolute;
+  top: 50px;
+  left: 45px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #fff;
+  z-index: 10;
+  filter: blur(2px);
+}
+
+.bubble::after {
+  content: '';
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  z-index: 10;
+  filter: blur(2px);
+}
+
+.bubble span {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.bubble span:nth-child(1) {
+  inset: 10px;
+  border-left: 15px solid #0fb4ff;
+  filter: blur(8px);
+}
+
+.bubble span:nth-child(2) {
+  inset: 10px;
+  border-right: 15px solid #ff4484;
+  filter: blur(8px);
+}
+
+.bubble span:nth-child(3) {
+  inset: 10px;
+  border-top: 15px solid #ffeb3b;
+  filter: blur(8px);
+}
+
+.bubble span:nth-child(4) {
+  inset: 30px;
+  border-left: 15px solid #ff4484;
+  filter: blur(12px);
+}
+
+.bubble span:nth-child(5) {
+  inset: 10px;
+  border-bottom: 10px solid #fff;
+  filter: blur(8px);
+  transform: rotate(330deg);
+}
 	</style>
-	<script type="text/javascript">
-		function ver_val_abs(x)
-{
-    if (Math.abs(x) < 1e-8)
-        return 1.0;
-    if (x != 0)
-        return asin(x) / x;
-    else
-        return 0;
-}
-
-function function_evaluation(x, n)
-{
-    let b = 0;
-    let f = 1.0;
-
-    for (let k = 0; k < n + 1; k++) {
-        b = x / (2 * k + 1);
-        if (b == 0)
-            break;
-        if (b < 0)
-            b = b * (-1);
-        f *= ver_val_abs(b);
-    }
-    return f;
-}
-
-function midpoint(a, b, n)
-{
-	alert("Bonjour")
-    let tmp = 0.0;
-    let f = 0.0;
-    let h = Number(b - a) / 10000;
-
-    for (let k = 0; k < 10000; k++) {
-        tmp = a + (h * (k + 0.5));
-        f += function_evaluation(tmp, n);
-    }
-    f = f * h;
-    process.stdout.write("Midpoint:\n");
-    process.stdout.write("I%d = %.10f\n");
-    process.stdout.write(n);
-    process.stdout.write(f);
-    process.stdout.write("diff = %.10f\n\n");
-    process.stdout.write((M_PI / 2) - f);
-    return f;
-}
-	</script>
 </head>
 <p style="text-align: center;">
-<img src="2362935.jpg" width="1000" height="500">
+<img src="2362935.jpg" width="1000" height="700">
 </p>
-<body>
+<body style="text-align: center;">
+<div class="container">
+    <div class="bubble">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="bubble">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="bubble">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="bubble">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="bubble">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+ </div>
 	<h2 style="text-align: center;">
 		Welcome to our site, we solve your Borwein calculations
 	</h2>
@@ -70,14 +170,40 @@ function midpoint(a, b, n)
 			body {
 				color: white;
 			}
-		</style>Enter a number : <?= $n; ?>
-	</p>
-	<form style="text-align: center;">
-		<input type="Number" name="n" id="n" placeholder="constant">
-		<input type="submit" name="formsend" id="forms">
-	</form>
-	<script type="text/javascript">
-		midpoint(0, 5000, $n)
-	</script>
+            .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+          }
+          
+          button {
+            height: 30px;
+            width: 120px;
+            font-size: 18px;
+            background-color: #eaeaea;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+          }
+		  footer {
+			position: initial;
+		  }
+		</style>
+        <h1 style="text-align: center;"> Enter a number : <?= $n; ?></h1>
+	</p style="text-align: center;">
+    <style>body{color: white}</style>
+		<h3><input type="number" name="n" id="n" placeholder="constant" height="70"></h3>
+		<button onclick="midpoint()" style="background-color: burlywood;">midpoint</button>
+		<button onclick="trapezoidal()" style="background-color: darkcyan;">trapezoidal</button>
+		<button onclick="simpson()" style="background-color: darkgoldenrod;">simpson</button>
+		<p id="mid" style="color: burlywood;"></p>
+		<p id="trap" style="color: darkcyan;"></p>
+		<p id="simp" style="color: goldenrod;"></p>
+    <script src="borwein.js"></script>
+	<footer>
+		<h1 style="margin-right: 3000px;"><strong>Contact:</strong></h1>
+		<a style="margin-right: 3000px;" href="tel:+22951791451">51.79.14.51</a>
+		<br><a style="margin-left: 1500px;" href="mailto:stellagbaguidi68@gmail.com">stellagbaguidi68@gmail.com</a>
+	</footer>
 </body>
 </html>
